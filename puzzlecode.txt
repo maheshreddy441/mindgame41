@@ -1,0 +1,72 @@
+import random
+
+def number_guessing_game():
+    number = random.randint(1, 100)
+    attempts = 0
+    print("Guess a number between 1 and 100!")
+    while True:
+        try:
+            guess = int(input("Enter your guess: "))
+            attempts += 1
+            if guess < number:
+                print("Too low! Try again.")
+            elif guess > number:
+                print("Too high! Try again.")
+            else:
+                print(f"Congratulations! You guessed it in {attempts} attempts.")
+                break
+        except ValueError:
+            print("Invalid input! Please enter a number.")
+
+def word_scramble():
+    words = ["python", "puzzle", "programming", "challenge", "developer"]
+    word = random.choice(words)
+    scrambled = "".join(random.sample(word, len(word)))
+    print(f"Unscramble this word: {scrambled}")
+    guess = input("Your guess: ")
+    if guess == word:
+        print("Correct! Well done.")
+    else:
+        print(f"Incorrect! The correct word was {word}.")
+
+def math_puzzle():
+    num1, num2 = random.randint(1, 10), random.randint(1, 10)
+    correct_answer = num1 * num2
+    print(f"Solve: {num1} x {num2} = ?")
+    try:
+        answer = int(input("Your answer: "))
+        if answer == correct_answer:
+            print("Correct! Great job.")
+        else:
+            print(f"Wrong! The correct answer was {correct_answer}.")
+    except ValueError:
+        print("Invalid input! Please enter a number.")
+
+def get_user_input(prompt):
+    try:
+        return input(prompt)
+    except OSError:
+        return "4"  # Default to exiting in environments without input support
+
+def main():
+    while True:
+        print("\nChoose a puzzle game:")
+        print("1. Number Guessing Game")
+        print("2. Word Scramble")
+        print("3. Math Puzzle")
+        print("4. Exit")
+        choice = get_user_input("Enter your choice: ")
+        if choice == '1':
+            number_guessing_game()
+        elif choice == '2':
+            word_scramble()
+        elif choice == '3':
+            math_puzzle()
+        elif choice == '4':
+            print("Thanks for playing! Goodbye.")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    main()
